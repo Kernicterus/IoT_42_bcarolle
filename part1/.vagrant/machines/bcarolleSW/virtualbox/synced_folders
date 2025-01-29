@@ -1,0 +1,1 @@
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"C:/VMs/IoT_42/part1/sync","disabled":false,"create":true,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
