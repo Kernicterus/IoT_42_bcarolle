@@ -25,17 +25,4 @@ Vagrant.configure("2") do |config|
     server.vm.provision "shell", path: "server.sh"
   end
 
-  # agent
-  config.vm.define "bcarolleSW" do |agent|
-    agent.vm.hostname = "bcarolleSW"
-    agent.vm.network "private_network", ip: "192.168.56.111", interface: "eth1"
-    agent.vm.provider "virtualbox" do |vb|
-      vb.gui = false
-      vb.cpus = 1
-      vb.memory = "1024"
-      vb.name = "bcarolleSW"
-
-    end
-    agent.vm.provision "shell", path: "agent.sh"
-  end
 end
