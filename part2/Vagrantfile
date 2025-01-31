@@ -23,6 +23,9 @@ Vagrant.configure("2") do |config|
       vb.name = "nledentS"
     end
     server.vm.provision "shell", path: "server.sh"
+    server.vm.provision "file", source: "./config/app1.yaml", destination: "/config/app1.yaml"
+    server.vm.provision "file", source: "./config/app2.yaml", destination: "/config/app2.yaml"
+    server.vm.provision "file", source: "./config/app3.yaml", destination: "/config/app3.yaml"
   end
 
 end
