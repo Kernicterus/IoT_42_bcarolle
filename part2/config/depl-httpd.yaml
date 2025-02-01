@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http-server-deployment
+spec:
+  selector:
+    matchLabels:
+      app: http-server
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: http-server
+    spec:
+      containers:
+      - name: http-server
+        image: httpd:2.4
+        volumeMounts :
+          - name : html-storage 
+            mountPath: /usr/local/apache2/htdocs
+        ports:
+        - containerPort: 80
+      volumes:
+        - name : html-storage
+          persistentVolumeClaim:
+            claimName : pvc-vol-httpd

@@ -11,5 +11,12 @@ apt install curl apt-transport-https -y
 curl -sfL https://get.k3s.io | sh -
 
 sleep 5
+sudo chmod 755 /config
+sudo chown vagrant:vagrant /config
 
-kubectl apply -f https://k8s.io/examples/application/deployment.yaml
+kubectl apply -f /config/pvolume.yaml
+sleep 2
+kubectl apply -f /config/pvc-vol-httpd.yaml
+kubectl apply -f /config/depl-graf.yaml
+kubectl apply -f /config/depl-httpd.yaml
+kubectl apply -f /config/nodePort-httpd.yaml
