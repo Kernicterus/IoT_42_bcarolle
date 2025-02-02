@@ -17,6 +17,15 @@ sudo chown vagrant:vagrant /config
 kubectl apply -f /config/pvolume.yaml
 sleep 2
 kubectl apply -f /config/pvc-vol-httpd.yaml
+
+kubectl apply -f /config/depl-portainer.yaml
 kubectl apply -f /config/depl-graf.yaml
 kubectl apply -f /config/depl-httpd.yaml
-kubectl apply -f /config/nodePort-httpd.yaml
+
+kubectl apply -f /config/app1-service.yaml
+kubectl apply -f /config/app2-service.yaml
+kubectl apply -f /config/app3-service.yaml
+
+kubectl apply -f /config/ingress.yaml
+
+# kubectl apply -f /config/nodePort-httpd.yaml
