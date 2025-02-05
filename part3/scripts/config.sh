@@ -26,7 +26,7 @@ echo -e "${GREEN}namespaces added ! ${NC}"
 echo -e "${LPURP}Argocd configuration ... ${NC}"
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 # kubectl apply -f "${DIR}/../confs/argocd-depl.yaml"
-# kubectl apply -f "${DIR}/../confs/argocd-svc.yaml"
+kubectl apply -f "${DIR}/../confs/argocd-svc.yaml"
 # kubectl apply -f "${DIR}/../confs/argocd-ingress.yaml"
 echo -e "${LPURP}Argocd configuration completed ! ${NC}"
 
