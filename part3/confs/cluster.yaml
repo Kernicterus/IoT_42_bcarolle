@@ -1,16 +1,13 @@
 apiVersion: k3d.io/v1alpha3
 kind: Simple
-metadata:
-  name: clusterNledent
+
 servers: 1
 agents: 2
 ports:
-  - port: 80:80
-    nodeFilters:
-      - server:*
-volumes:
-  - type: volume
-    name: my-data
-    path: /var/lib/data
-kubeAPI:
-  hostPort: 6443
+  - port: 30105:30105
+    nodeFilters: 
+      - loadbalancer
+  - port: 30205:30205
+    nodeFilters: 
+      - loadbalancer
+

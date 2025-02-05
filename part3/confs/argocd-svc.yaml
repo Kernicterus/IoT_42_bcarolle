@@ -4,10 +4,10 @@ metadata:
   name: argocd-svc
   namespace: argocd
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - port: 80
       targetPort: 8080
-      protocol: TCP
+      nodeport: 30105 
   selector:
-    app: argocd
+    app.kubernetes.io/name: argocd-server

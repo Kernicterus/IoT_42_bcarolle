@@ -7,13 +7,23 @@ metadata:
     traefik.ingress.k8s.io/router.entrypoints: web
 spec:
   rules:
-    - host: argocd.localhost
-      http:
+    # - host: argocd.localhost
+    #   http:
+    #     paths:
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: argocd-svc
+    #             port:
+    #               number: 80
+    # Règle par défaut si aucun host ne correspond
+    - http:
         paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: argocd-svc
-                port:
-                  number: 80
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: argocd-svc
+              port:
+                number: 80
