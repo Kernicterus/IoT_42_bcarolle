@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: app42
-          image: wil42/playground:v2
+          image: bitnami/grafana:latest
           ports:
-            - containerPort: 29946
+            - containerPort: 3000
