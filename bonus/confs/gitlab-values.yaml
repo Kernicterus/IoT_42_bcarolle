@@ -1,0 +1,17 @@
+postgresql:
+  persistence:
+    enabled: true
+    existingClaim: pvc-vol-gitlab
+    size: 500Mi
+
+redis:
+  persistence:
+    enabled: true
+    existingClaim: pvc-vol-gitlab
+
+gitlab:
+  task-runner:
+    backups:
+      persistence:
+        enabled: true
+        existingClaim: pvc-vol-gitlab
