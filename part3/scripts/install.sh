@@ -31,7 +31,7 @@ fi
 
 # ----- INSTALLATION OF K3D -----
 if ! command -v k3d >/dev/null 2>&1; then
-  wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | TAG=v5.0.0 bash
+  wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | TAG=v5.8.1 bash
 else
   echo "k3d already installed"
 fi

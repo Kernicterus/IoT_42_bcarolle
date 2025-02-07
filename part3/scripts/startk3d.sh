@@ -10,7 +10,7 @@ FILE="${DIR}/../confs/cluster.yaml"
 
 
 echo -e "${LPURP}k3d cluster creation ... ${NC}"
-k3d cluster create $CLUSTER_NAME --image rancher/k3s:v1.26.0-k3s1 --config $DIR/../confs/cluster.yaml
+k3d cluster create $CLUSTER_NAME --timeout 300s --image rancher/k3s:v1.32.1-k3s1 --config $DIR/../confs/cluster.yaml
 echo -e "${GREEN}k3d cluster creation completed ! ${NC}"
 export KUBECONFIG=~/.kube/config
 
