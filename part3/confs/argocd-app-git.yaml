@@ -2,17 +2,17 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: app42      
-  namespace: dev   
+  namespace: argocd   
 spec:
   project: default      
   source:
-    repoURL: 'https://github.com/Kernicterus/IoT_42.git'
-    targetRevision: main
+    repoURL: 'https://github.com/Kernicterus/IoT_42/'
+    targetRevision: HEAD
     path: 'part3/confs/manifests-app42'
   destination:
     server: 'https://kubernetes.default.svc'         
     namespace: dev                   
   syncPolicy:
     automated:
-      prune: true                                        
-      selfHeal: true                                   
+      prune: true   
+      selfHeal: true                  
