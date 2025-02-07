@@ -1,8 +1,3 @@
-source:
-  repoURL: 'https://github.com/Kernicterus/IoT_42.git'
-  targetRevision: main
-  path: 'part3/confs/manifests-app42'
-
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:

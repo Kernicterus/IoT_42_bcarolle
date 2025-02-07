@@ -36,6 +36,7 @@ kubectl wait --for=condition=available deployment -n argocd --all --timeout=240s
 echo -e "${LPURP}Waiting pods of ArgoCD ${NC}"
 
 kubectl wait --for=condition=ready pod -n argocd --all --timeout=240s --field-selector=status.phase!=Succeeded | grep -v "condition met"
+kubectl apply -f confs/argocd-app-git.yaml
 echo "Secrets:"
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode
 
