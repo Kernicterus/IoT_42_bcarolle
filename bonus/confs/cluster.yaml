@@ -4,10 +4,21 @@ kind: Simple
 servers: 1
 agents: 2
 ports:
+# pour argocd et l app
   - port: 30105:30105
     nodeFilters: 
       - loadbalancer
   - port: 30205:30205
+    nodeFilters: 
+      - loadbalancer
+# pour gitlab
+  - port: 30305:30305 #webservice
+    nodeFilters: 
+      - loadbalancer
+  - port: 30405:30405 #workhouse
+    nodeFilters: 
+      - loadbalancer
+  - port: 30505:30505 #metrics
     nodeFilters: 
       - loadbalancer
 

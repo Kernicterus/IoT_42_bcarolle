@@ -34,8 +34,8 @@ kubectl apply -f "${DIR}/confs/manifests-argocd/argocd-app-git.yaml"
 
 echo "Argocd secret:"
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode
+echo ""
 echo "Argocd access: http://127.0.0.1:30105 "
-
 echo "App access: http://127.0.0.1:30205 "
 
 bash $DIR/scripts/gitlab.sh

@@ -1,8 +1,33 @@
+global:
+  ingress:
+    configureCertmanager: false
+    class: "nginx"
+    tls:
+      enabled: false
+  hosts:
+    domain: "localhost"
+    https: false
+  rails:
+    bootsnap:
+      enabled: false
+
+certmanager:
+  install: false
+
+nginx-ingress:
+  enabled: false
+
+prometheus:
+  install: false
+
+gitlab-runner:
+  install: false
+
 postgresql:
   persistence:
     enabled: true
     existingClaim: pvc-vol-gitlab
-    size: 500Mi
+    size: 256Mi
 
 redis:
   persistence:
@@ -10,8 +35,8 @@ redis:
     existingClaim: pvc-vol-gitlab
 
 gitlab:
-  task-runner:
-    backups:
-      persistence:
-        enabled: true
-        existingClaim: pvc-vol-gitlab
+  toolbox:
+    enabled : true
+    persistence:
+      enabled: true
+      existingClaim: pvc-vol-gitlab

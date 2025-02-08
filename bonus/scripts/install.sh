@@ -50,6 +50,13 @@ else
   echo "helm already installed"
 fi
 
+# ----- INSTALLATION OF JQ -----
+if ! command -v jq >/dev/null 2>&1; then
+  sudo apt-get update &&  apt upgrade -y
+  sudo apt install jq -y
+else
+  echo "jq already installed"
+fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 bash $DIR/startk3d.sh
