@@ -2,14 +2,12 @@
 
 # ----- INSTALLATION OF DOCKER -----
 if ! command -v docker >/dev/null 2>&1; then
-  # Add Docker's official GPG key:
   sudo apt-get update
   sudo apt-get install ca-certificates curl
   sudo install -m 0755 -d /etc/apt/keyrings
   sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
   sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-  # Add the repository to Apt sources:
   echo \
     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
     $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
@@ -21,10 +19,6 @@ if ! command -v docker >/dev/null 2>&1; then
 
   sudo usermod -aG docker $(whoami)
 
-  # if [ ! -e docker-desktop-amd64.deb ]; then
-  #     wget -O "docker-desktop-amd64.deb" "https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64&_gl=1*1pagoyf*_ga*MzQxNDI4ODkxLjE3Mzg0MTQ0NzU.*_ga_XJWPQMJYHQ*MTczODUwMzA1My4zLjEuMTczODUwMzE4MC42MC4wLjA."
-  # fi
-  # sudo apt install ./docker-desktop-amd64.deb
 else
   echo "docker already installed"
 fi
