@@ -8,11 +8,11 @@ CLUSTER_NAME=clusterNledent
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
 FILE="${DIR}/confs/cluster.yaml"
 
-
 echo -e "${LPURP}k3d cluster creation ... ${NC}"
 mkdir -p /home/$USER/gitlab-data
-k3d cluster create $CLUSTER_NAME --timeout 300s --image rancher/k3s:v1.32.1-k3s1 --config $DIR/confs/cluster.yaml --volume /home/$USER/gitlab-data:/data/gitlab
+k3d cluster create $CLUSTER_NAME --timeout 300s --image rancher/k3s:v1.32.1-k3s1 --config $DIR/confs/cluster.yaml --volume /home/$USER/gitlab-data:/data/gitlab > /dev/null 2>&1
 echo -e "${GREEN}k3d cluster creation completed ! ${NC}"
-export KUBECONFIG=~/.kube/config
+# export KUBECONFIG=~/.kube/config
+export CLUSTER_NAME
 
-bash $DIR/scripts/config.sh $CLUSTER_NAME
+bash $DIR/scripts/gitlab.sh

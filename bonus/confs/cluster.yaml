@@ -21,4 +21,8 @@ ports:
   - port: 30505:30505 #metrics
     nodeFilters: 
       - loadbalancer
+  - port: 30605:30605 #shell
+    nodeFilters: 
+      - loadbalancer
+
 
