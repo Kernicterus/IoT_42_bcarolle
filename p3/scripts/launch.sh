@@ -1,5 +1,14 @@
 #!/bin/bash
 
+if [ -z "$1" ]; then
+  echo "Missing argument. Usage: $0 <clusterName>"
+  exit 1
+fi
+
+export CLUSTER_NAME=$1
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
+source $DIR/../.env
+
 # ----- INSTALLATION OF DOCKER -----
 if ! command -v docker >/dev/null 2>&1; then
   sudo apt-get update
@@ -50,7 +59,7 @@ else
   echo "helm already installed"
 fi
 
-
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-bash $DIR/startk3d.sh
+# ----- START CONFIGS -----
+bash $DIR/scripts/startk3d.sh 
+bash $DIR/scripts/argocd.sh
 

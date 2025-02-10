@@ -1,0 +1,8 @@
+global:
+  imagePullSecrets:
+    - name: dockerhub-secret
+redis:
+  enabled: true
+server:
+  service:
+    type: ClusterIP

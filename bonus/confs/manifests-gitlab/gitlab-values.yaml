@@ -23,20 +23,23 @@ prometheus:
 gitlab-runner:
   install: false
 
-postgresql:
-  persistence:
-    enabled: true
-    existingClaim: pvc-vol-gitlab
-    size: 256Mi
-
-redis:
-  persistence:
-    enabled: true
-    existingClaim: pvc-vol-gitlab
-
 gitlab:
-  toolbox:
-    enabled : true
-    persistence:
-      enabled: true
-      existingClaim: pvc-vol-gitlab
+  redis:
+    minReplicas: 1
+    maxReplicas: 1
+  postgres:
+    minReplicas: 1
+    maxReplicas: 1
+  webservice:
+    minReplicas: 1
+    maxReplicas: 1
+  sidekiq:
+    minReplicas: 1
+    maxReplicas: 1
+  gitlab-shell:
+    minReplicas: 1
+    maxReplicas: 1
+  registry:
+    hpa:
+      minReplicas: 1
+      maxReplicas: 1
