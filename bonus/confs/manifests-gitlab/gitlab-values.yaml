@@ -1,7 +1,7 @@
 global:
   ingress:
     configureCertmanager: false
-    class: "nginx"
+    # class: "nginx"
     tls:
       enabled: false
   hosts:
@@ -10,17 +10,6 @@ global:
   rails:
     bootsnap:
       enabled: false
-
-certmanager:
-  install: false
-
-nginx-ingress:
-  enabled: false
-
-gitlab:
-  gitaly:
-    persistence:
-      storageClass: standard
   webservice:
     minReplicas: 1
     maxReplicas: 1
@@ -31,6 +20,22 @@ gitlab:
       limits:
         memory: 1Gi
         cpu: 500m
+  redis :
+    install : false
+
+gitlab-runner:
+  install: true
+  
+certmanager:
+  install: false
+
+nginx-ingress:
+  enabled: false
+
+prometheus:
+  install: false
+
+gitlab:
   sidekiq:
     minReplicas: 1
     maxReplicas: 1
@@ -41,11 +46,3 @@ gitlab:
       limits:
         memory: 512Mi
         cpu: 200m
-  registry:
-    enabled: false
-  minio:
-    enabled: false
-  prometheus:
-    install: false
-  gitlab-runner:
-    install: false

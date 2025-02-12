@@ -6,6 +6,8 @@ NC='\033[0m'
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
 
 echo -e "${LPURP}Waiting for gitlab webservices to be ready ... ${NC}"
+# kubectl delete hpa gitlab-webservice-default -n gitlab
+
 kubectl rollout status deployment/gitlab-webservice-default -n gitlab --timeout=900s
 
 # boucle pour etre sur que les requetes curl ne renvoie pas empty server
