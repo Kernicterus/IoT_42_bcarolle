@@ -16,10 +16,16 @@ Vagrant.configure("2") do |config|
     server.vm.hostname = "nledentS"
     server.vm.network "private_network", ip: "192.168.56.110", interface: "eth1"
 
-    server.vm.provider "virtuvagranalbox" do |vb|
+    server.vm.provider "virtualbox" do |vb|
       vb.gui = false
       vb.cpus = 1
-      vb.memory = "2048"
+      vb.memory = "4096"
+      vb.customize ["modifyvm", :id, "--ioapic", "on"]
+
+      vb.customize ["modifyvm", :id, "--cpuexecutioncap", "80"]
+
+      # Active le support Nested VT-x/AMD-V pour accélérer la virtualisation
+      vb.customize ["modifyvm", :id, "--nested-hw-virt", "on"]
       vb.name = "nledentS"
     end
 
@@ -27,3 +33,7 @@ Vagrant.configure("2") do |config|
   end
 
 end
+
+
+# cmd curl host
+# curl -H "Host: app3.com" --location http://192.168.56.110 
