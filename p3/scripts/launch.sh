@@ -7,7 +7,13 @@ fi
 
 export CLUSTER_NAME=$1
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
-source $DIR/../.env
+
+if [ -r "${DIR}/../.env" ]; then
+  source $DIR/../.env
+else
+  echo -e "Missing .env"
+  exit 1
+fi
 
 # ----- INSTALLATION OF DOCKER -----
 if ! command -v docker >/dev/null 2>&1; then
