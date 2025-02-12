@@ -11,4 +11,4 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /config/pvolume
+    path: /confs/pvolume

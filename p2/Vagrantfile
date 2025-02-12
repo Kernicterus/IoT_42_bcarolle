@@ -9,7 +9,7 @@
 
 Vagrant.configure("2") do |config|
   config.vm.box = "debian/bookworm64"
-  config.vm.synced_folder "../confs", "/confs", create: true, disabled: false
+  config.vm.synced_folder "/confs", "/confs", create: true, disabled: false
   config.vm.network "forwarded_port", guest: 22, host: 2240
 
   config.vm.define "nledentS" do |server|
