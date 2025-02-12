@@ -17,29 +17,35 @@ certmanager:
 nginx-ingress:
   enabled: false
 
-prometheus:
-  install: false
-
-gitlab-runner:
-  install: false
-
 gitlab:
-  redis:
-    minReplicas: 1
-    maxReplicas: 1
-  postgres:
-    minReplicas: 1
-    maxReplicas: 1
+  gitaly:
+    persistence:
+      storageClass: standard
   webservice:
     minReplicas: 1
     maxReplicas: 1
+    resources:
+      requests:
+        memory: 512Mi
+        cpu: 250m
+      limits:
+        memory: 1Gi
+        cpu: 500m
   sidekiq:
     minReplicas: 1
     maxReplicas: 1
-  gitlab-shell:
-    minReplicas: 1
-    maxReplicas: 1
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 100m
+      limits:
+        memory: 512Mi
+        cpu: 200m
   registry:
-    hpa:
-      minReplicas: 1
-      maxReplicas: 1
+    enabled: false
+  minio:
+    enabled: false
+  prometheus:
+    install: false
+  gitlab-runner:
+    install: false
