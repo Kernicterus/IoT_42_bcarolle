@@ -20,12 +20,12 @@ global:
       limits:
         memory: 1Gi
         cpu: 500m
-  redis :
-    install : false
+  # redis :           si désactivé oath token ne fonctionne plus
+  #   install : false
 
 gitlab-runner:
   install: true
-  
+
 certmanager:
   install: false
 
