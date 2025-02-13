@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/Kernicterus/IoT_42/'
     targetRevision: HEAD
-    path: 'part3/confs/manifests-app42'
+    path: 'p3/confs/manifests-app42'
   destination:
     server: 'https://kubernetes.default.svc'         
     namespace: dev                   
