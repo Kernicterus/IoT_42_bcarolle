@@ -59,13 +59,15 @@ fi
 if ! command -v helm >/dev/null 2>&1; then
   sudo apt-get update &&  apt upgrade -y
   sudo curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-  helm repo add argo-cd https://argoproj.github.io/argo-helm
-  helm repo update
 else
   echo "helm already installed"
 fi
 
 # ----- START CONFIGS -----
-bash $DIR/scripts/startk3d.sh 
+bash $DIR/scripts/startk3d.sh
+if [ $? -ne 0 ]; then
+  echo "startk3d.sh script failed"
+  exit 1
+fi
 bash $DIR/scripts/argocd.sh
 

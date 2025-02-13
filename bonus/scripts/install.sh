@@ -44,8 +44,7 @@ fi
 if ! command -v helm >/dev/null 2>&1; then
   sudo apt-get update &&  apt upgrade -y
   sudo curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-  helm repo add argo-cd https://argoproj.github.io/argo-helm
-  helm repo update
+
 else
   echo "helm already installed"
 fi

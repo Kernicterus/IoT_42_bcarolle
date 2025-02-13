@@ -13,17 +13,18 @@ kubectl config current-context > /dev/null
 echo -e "${GREEN}Clustername ${NC}"
 echo -e "$CLUSTER_NAME"
 
-echo -e "${LPURP}config name spaces ... ${NC}"
-kubectl apply -f "${DIR}/confs/nspaces.yaml" > /dev/null
-echo -e "${GREEN}namespaces added ! ${NC}"
+# echo -e "${LPURP}helm app argocd creation ... ${NC}"
+# helm repo add argo-cd https://argoproj.github.io/argo-helm
+# helm repo update
+# helm install argocd argo-cd/argo-cd --namespace argocd \
+#   --set server.service.type=ClusterIP \
+#   --set redis.enabled=true > /dev/null
+# echo -e "${GREEN}helm app argocd creation completed ! ${NC}"
 
-echo -e "${LPURP}helm app argocd creation ... ${NC}"
-helm install argocd argo-cd/argo-cd --namespace argocd \
-  --set server.service.type=ClusterIP \
-  --set redis.enabled=true > /dev/null
-echo -e "${GREEN}helm app argocd creation completed ! ${NC}"
-
-kubectl apply -f "${DIR}/confs/manifests-argocd/argocd-svc.yaml" > /dev/null
+echo -e "${LPURP}depl argocd ... ${NC}"
+kubectl apply -f "${DIR}/confs/manifests-argocd/argocd-depl.yaml" #> /dev/null
+kubectl apply -f "${DIR}/confs/manifests-argocd/argocd-svc.yaml" #> /dev/null
+echo -e "${GREEN}argocd depl completed ! ${NC}"
 
 echo -e "${LPURP}Waiting deployment of ArgoCD ${NC}"
 kubectl wait --for=condition=available deployment -n argocd --all --timeout=240s 2>&1 | grep -v "condition met"
