@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default      
   source:
-    repoURL: 'https://github.com/Kernicterus/IoT_42/'
+    repoURL: 'https://github.com/Kernicterus/IoT_42_bcarolle/'
     targetRevision: HEAD
     path: 'p3/confs/manifests-app42'
   destination:
