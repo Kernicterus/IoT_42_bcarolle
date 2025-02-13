@@ -2,8 +2,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: app-ingress
-  # annotations:
-    # traefik.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - host: app1.com
@@ -24,6 +22,16 @@ spec:
         backend:
           service:
             name: app2-service
+            port:
+              number: 80
+  - host: app3.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app3-service
             port:
               number: 80
   # Règle par défaut si aucun host ne correspond

@@ -31,8 +31,8 @@ curl --request POST "$GITLAB_URL" \
 
 # ajout ssh key
 if [ ! -e  ~/.ssh/id_rsa.pub ]; then
-echo "ssh creation :"
-ssh-keygen -t rsa -b 4096 -C "mymail@google.com"
+     echo "ssh creation :"
+     ssh-keygen -t rsa -b 4096 -C "mymail@google.com"
 fi
 
 # push ssh
