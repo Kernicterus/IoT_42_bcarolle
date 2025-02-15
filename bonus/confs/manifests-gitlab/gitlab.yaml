@@ -1,0 +1,54 @@
+apiVersion: apps.gitlab.com/v1beta1
+kind: GitLab
+metadata:
+  name: gitlab
+  namespace: gitlab
+spec:
+  chart:
+    version: 8.8.2
+    values:
+      global:
+        ingress:
+          configureCertmanager: false
+          tls:
+            enabled: false
+        hosts:
+          domain: "localhost"
+          https: false
+
+      gitlab-runner:
+        install: false
+
+      certmanager:
+        install: false
+
+      nginx-ingress:
+        enabled: false
+
+      prometheus:
+        install: false
+
+      gitlab:
+        gitlab-kas:
+          minReplicas: 1
+          maxReplicas: 1
+        gitlab-shell:
+          minReplicas: 1
+          maxReplicas: 1      
+        gitlab-registry:
+          minReplicas: 1
+          maxReplicas: 1      
+        sidekiq:
+          minReplicas: 1
+          maxReplicas: 1
+          resources:
+            requests:
+              memory: 500Mi
+              cpu: 250m
+        webservice:
+          minReplicas: 1
+          maxReplicas: 1
+          resources:
+            requests:
+              memory: 1Gi
+              cpu: 250m

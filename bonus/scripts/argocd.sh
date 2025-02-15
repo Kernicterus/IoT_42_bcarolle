@@ -22,8 +22,8 @@ echo -e "$CLUSTER_NAME"
 # echo -e "${GREEN}helm app argocd creation completed ! ${NC}"
 
 echo -e "${LPURP}depl argocd ... ${NC}"
-kubectl apply -f "${DIR}/confs/manifests-argocd/argocd-depl.yaml" #> /dev/null
-kubectl apply -f "${DIR}/confs/manifests-argocd/argocd-svc.yaml" #> /dev/null
+kubectl apply -f "https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml" -n argocd #> /dev/null
+kubectl apply -f "${DIR}/confs/manifests-argocd/argocd-svc.yaml" -n argocd #> /dev/null
 echo -e "${GREEN}argocd depl completed ! ${NC}"
 
 echo -e "${LPURP}Waiting deployment of ArgoCD ${NC}"

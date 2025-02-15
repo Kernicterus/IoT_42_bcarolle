@@ -41,13 +41,13 @@ else
 fi
 
 # ----- INSTALLATION OF HELM -----
-if ! command -v helm >/dev/null 2>&1; then
-  sudo apt-get update &&  apt upgrade -y
-  sudo curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+# if ! command -v helm >/dev/null 2>&1; then
+#   sudo apt-get update &&  apt upgrade -y
+#   sudo curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
-else
-  echo "helm already installed"
-fi
+# else
+#   echo "helm already installed"
+# fi
 
 # ----- INSTALLATION OF JQ -----
 if ! command -v jq >/dev/null 2>&1; then

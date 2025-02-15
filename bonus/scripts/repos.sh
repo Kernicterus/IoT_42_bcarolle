@@ -8,10 +8,13 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
 echo -e "${LPURP}Waiting for gitlab webservices to be ready ... ${NC}"
 # kubectl delete hpa gitlab-webservice-default -n gitlab
 
-kubectl rollout status deployment/gitlab-webservice-default -n gitlab --timeout=900s
+# kubectl rollout status deployment/gitlab-webservice-default -n gitlab --timeout=900s
 
 # boucle pour etre sur que les requetes curl ne renvoie pas empty server
 bash $DIR/scripts/check_curl.sh
+
+kubectl patch svc gitlab-webservice-default -n gitlab  -p '{"spec": {"type": "NodePort", "ports": [{"name": "http-webservice", "nodePort": 30305, "port": 8080}, {"name": "http-workhorse", "nodePort": 30405, "port": 8181}, {"name": "http-metrics-ws", "nodePort": 30505, "port": 8083}]}}' > /dev/null
+kubectl patch svc gitlab-gitlab-shell -n gitlab  -p '{"spec": {"type": "NodePort", "ports": [{"name": "ssh", "nodePort": 30605, "port": 22}]}}' > /dev/null
 
 # recupere le pass root gitlab
 pass=$(kubectl get secret gitlab-gitlab-initial-root-password -n gitlab -o jsonpath="{.data.password}" | base64 --decode)
@@ -32,7 +35,7 @@ curl --request POST "$GITLAB_URL" \
 # ajout ssh key
 if [ ! -e  ~/.ssh/id_rsa.pub ]; then
      echo "ssh creation :"
-     ssh-keygen -t rsa -b 4096 -C "mymail@google.com"
+     ssh-keygen -t rsa -b 4096 -C "mymail@iot.com"
 fi
 
 # push ssh
