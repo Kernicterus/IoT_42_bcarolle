@@ -10,18 +10,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
 kubectl config use-context k3d-$CLUSTER_NAME > /dev/null
 kubectl config current-context > /dev/null
 
-# ---- HELM argocd
-# echo -e "${LPURP}helm app argocd creation ... ${NC}"
-# helm repo add argo-cd https://argoproj.github.io/argo-helm
-# helm repo update
-# helm install argocd argo-cd/argo-cd --namespace argocd \
-#   --set server.service.type=ClusterIP \
-#   --set redis.enabled=true > /dev/null
-# echo -e "${GREEN}helm app argocd creation completed ! ${NC}"
-
 echo -e "${LPURP}depl argocd ... ${NC}"
-kubectl apply -f "https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml" -n argocd #> /dev/null
-kubectl apply -f "${DIR}/confs/manifests-argocd/argocd-svc.yaml" -n argocd #> /dev/null
+kubectl apply -f "https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml" -n argocd > /dev/null
+kubectl patch svc argocd-server -n argocd  -p '{"spec": {"type": "NodePort", "ports": [{"name": "http", "nodePort": 30105, "port": 80}]}}' > /dev/null
 echo -e "${GREEN}argocd depl completed ! ${NC}"
 
 echo -e "${LPURP}Waiting deployment of ArgoCD ...${NC}"
@@ -41,6 +32,7 @@ echo "URL ArgoCD:    http://127.0.0.1:30105 "
 echo "login argocd : admin"
 echo "pass argocd :  ${passArgocd}"
 echo "URL App:       http://127.0.0.1:30205 "
+
 # kubectl port-forward svc/argocd-server -n argocd 8080:80
 # netsh interface portproxy add v4tov4 listenport=30105 listenaddress=0.0.0.0 connectport=30105 connectaddress=172.23.233.8
 # netsh interface portproxy add v4tov4 listenport=30205 listenaddress=0.0.0.0 connectport=30205 connectaddress=172.23.233.8

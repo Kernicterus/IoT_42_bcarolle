@@ -1,5 +1,20 @@
 #!/bin/bash
 
+if [ -z "$1" ]; then
+  echo "Missing argument. Usage: $0 <clusterName>"
+  exit 1
+fi
+
+export CLUSTER_NAME=$1
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
+
+if [ -r "${DIR}/../.env" ]; then
+  source $DIR/../.env
+else
+  echo -e "Missing .env"
+  exit 1
+fi
+
 # ----- INSTALLATION OF DOCKER -----
 if ! command -v docker >/dev/null 2>&1; then
   sudo apt-get update
@@ -40,15 +55,6 @@ else
   echo "kubectl already installed"
 fi
 
-# ----- INSTALLATION OF HELM -----
-# if ! command -v helm >/dev/null 2>&1; then
-#   sudo apt-get update &&  apt upgrade -y
-#   sudo curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-
-# else
-#   echo "helm already installed"
-# fi
-
 # ----- INSTALLATION OF JQ -----
 if ! command -v jq >/dev/null 2>&1; then
   sudo apt-get update &&  apt upgrade -y
@@ -57,6 +63,10 @@ else
   echo "jq already installed"
 fi
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-bash $DIR/startk3d.sh
+bash $DIR/scripts/startk3d.sh
+if [ $? -ne 0 ]; then
+  echo "startk3d.sh script failed"
+  exit 1
+fi
 
+bash $DIR/scripts/gitlab.sh

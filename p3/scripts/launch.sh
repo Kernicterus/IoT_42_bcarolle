@@ -55,14 +55,6 @@ else
   echo "kubectl already installed"
 fi
 
-# ----- INSTALLATION OF HELM -----
-if ! command -v helm >/dev/null 2>&1; then
-  sudo apt-get update &&  apt upgrade -y
-  sudo curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-else
-  echo "helm already installed"
-fi
-
 # ----- START CONFIGS -----
 bash $DIR/scripts/startk3d.sh
 if [ $? -ne 0 ]; then

@@ -28,7 +28,3 @@ for ns in $(kubectl get namespaces --no-headers | awk '{print $1}'); do
     -p '{"imagePullSecrets": [{"name": "dockerhub-secret"}]}' \
     --namespace $ns
 done
-
-# kubectl patch serviceaccount default \
-#   -p '{"imagePullSecrets": [{"name": "dockerhub-secret"}]}' \
-#   --namespace argocd

@@ -13,17 +13,9 @@ kubectl config current-context > /dev/null
 echo -e "${GREEN}Clustername ${NC}"
 echo -e "$CLUSTER_NAME"
 
-# echo -e "${LPURP}helm app argocd creation ... ${NC}"
-# helm repo add argo-cd https://argoproj.github.io/argo-helm
-# helm repo update
-# helm install argocd argo-cd/argo-cd --namespace argocd \
-#   --set server.service.type=ClusterIP \
-#   --set redis.enabled=true > /dev/null
-# echo -e "${GREEN}helm app argocd creation completed ! ${NC}"
-
 echo -e "${LPURP}depl argocd ... ${NC}"
-kubectl apply -f "https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml" -n argocd #> /dev/null
-kubectl apply -f "${DIR}/confs/manifests-argocd/argocd-svc.yaml" -n argocd #> /dev/null
+kubectl apply -f "https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml" -n argocd > /dev/null
+kubectl patch svc argocd-server -n argocd  -p '{"spec": {"type": "NodePort", "ports": [{"name": "http", "nodePort": 30105, "port": 80}]}}' > /dev/null
 echo -e "${GREEN}argocd depl completed ! ${NC}"
 
 echo -e "${LPURP}Waiting deployment of ArgoCD ${NC}"
