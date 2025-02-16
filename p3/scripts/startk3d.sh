@@ -12,6 +12,7 @@ if k3d cluster list | grep -wq $CLUSTER_NAME; then
   echo -e "${RED}Cluster $CLUSTER_NAME already exists. Exiting...${NC}"
   exit 1
 fi
+
 k3d cluster create $CLUSTER_NAME --timeout 300s --image rancher/k3s:v1.32.1-k3s1 --config $FILE > /dev/null
 echo -e "${GREEN}k3d cluster creation completed ! ${NC}"
 
@@ -26,5 +27,5 @@ bash $DIR/scripts/dockerSecret.sh argocd
 for ns in $(kubectl get namespaces --no-headers | awk '{print $1}'); do
   kubectl patch serviceaccount default \
     -p '{"imagePullSecrets": [{"name": "dockerhub-secret"}]}' \
-    --namespace $ns
+    --namespace $ns > /dev/null
 done
