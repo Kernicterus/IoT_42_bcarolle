@@ -28,5 +28,5 @@ bash $DIR/scripts/dockerSecret.sh argocd
 for ns in $(kubectl get namespaces --no-headers | awk '{print $1}'); do
   kubectl patch serviceaccount default \
     -p '{"imagePullSecrets": [{"name": "dockerhub-secret"}]}' \
-    --namespace $ns
+    --namespace $ns > /dev/null
 done

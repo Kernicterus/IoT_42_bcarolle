@@ -10,9 +10,6 @@ passGitlab=$1
 kubectl config use-context k3d-$CLUSTER_NAME > /dev/null
 kubectl config current-context > /dev/null
 
-echo -e "${GREEN}Clustername ${NC}"
-echo -e "$CLUSTER_NAME"
-
 echo -e "${LPURP}depl argocd ... ${NC}"
 kubectl apply -f "https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml" -n argocd > /dev/null
 kubectl patch svc argocd-server -n argocd  -p '{"spec": {"type": "NodePort", "ports": [{"name": "http", "nodePort": 30105, "port": 80}]}}' > /dev/null
@@ -29,6 +26,9 @@ kubectl apply -f "${DIR}/confs/manifests-argocd/argocd-app-git.yaml" > /dev/null
 passArgocd=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
 
 # print credentials
+echo -e "${RED}     Cluster ${NC}"
+echo "Cluster name : ${CLUSTER_NAME}"
+
 echo -e "${RED}  ArgoCD:${NC}"
 echo "URL ArgoCD:    http://127.0.0.1:30105 "
 echo "login argocd : admin"
