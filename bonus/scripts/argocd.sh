@@ -40,3 +40,6 @@ echo "URL :          http://localhost:30405"
 echo "SSH :          ssh -T git@localhost -p 30605 "
 echo "login :        root"
 echo "pass :         ${passGitlab}"
+
+kubectl patch svc gitlab-webservice-default -n gitlab  -p '{"spec": {"type": "NodePort", "ports": [{"name": "http-webservice", "nodePort": 30305, "port": 8080}, {"name": "http-workhorse", "nodePort": 30405, "port": 8181}, {"name": "http-metrics-ws", "nodePort": 30505, "port": 8083}]}}' > /dev/null
+kubectl patch svc gitlab-gitlab-shell -n gitlab  -p '{"spec": {"type": "NodePort", "ports": [{"name": "ssh", "nodePort": 30605, "port": 22}]}}' > /dev/null
